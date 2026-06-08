@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UMUYOBORO TV | Secure Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#000,#111);
+}
+
+.login-box{
+width:92%;
+max-width:420px;
+background:rgba(0,0,0,.9);
+padding:40px 30px;
+border-radius:18px;
+border:1px solid rgba(255,215,0,.2);
+color:#fff;
+}
+
+h1{
+color:gold;
+text-align:center;
+margin-bottom:10px;
+}
+
+p{
+text-align:center;
+color:#aaa;
+margin-bottom:20px;
+}
+
+.input-box{
+position:relative;
+margin-bottom:15px;
+}
+
+.input-box input{
+width:100%;
+padding:14px 40px;
+border:none;
+outline:none;
+border-radius:10px;
+background:#111;
+color:#fff;
+}
+
+.input-box i:first-child{
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+}
+
+.eye{
+position:absolute;
+right:12px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:gold;
+font-weight:bold;
+cursor:pointer;
+}
+
+#toast{
+position:fixed;
+top:20px;
+right:20px;
+background:#111;
+color:#fff;
+padding:12px 15px;
+display:none;
+border-left:4px solid gold;
+}
+
+#lockMsg{
+color:red;
+text-align:center;
+margin-bottom:10px;
+font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="toast"></div>
+
+<div class="login-box">
+
+<h1>UMUYOBORO TV</h1>
+<p>Secure Login Panel</p>
+
+<div id="lockMsg"></div>
+
+<form id="form">
+
+<div class="input-box">
+<i class="fa-solid fa-user"></i>
+<input id="username" type="text" placeholder="Username" required>
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-lock"></i>
+<input id="password" type="password" placeholder="Password" required>
+<i class="fa-solid fa-eye eye" id="toggle"></i>
+</div>
+
+<button type="submit">Login</button>
+
+</form>
+
+</div>
+
+<script>
+const form=document.getElementById("form");
+const user=document.getElementById("username");
+const pass=document.getElementById("password");
+const toast=document.getElementById("toast");
+const toggle=document.getElementById("toggle");
+const lockMsg=document.getElementById("lockMsg");
+
+const USER="admin";
+const PASSWORD="12345";
+
+let attempts=0;
+let locked=false;
+
+function show(msg){
+toast.textContent=msg;
+toast.style.display="block";
+setTimeout(()=>{
+toast.style.display="none";
+},2000);
+}
+
+toggle.onclick=()=>{
+pass.type=pass.type==="password"?"text":"password";
+toggle.classList.toggle("fa-eye-slash");
+};
+
+function lock(){
+locked=true;
+lockMsg.textContent="Too many attempts. Try again in 10 seconds.";
+
+setTimeout(()=>{
+locked=false;
+attempts=0;
+lockMsg.textContent="";
+},10000);
+}
+
+form.addEventListener("submit",(e)=>{
+e.preventDefault();
+
+if(locked){
+show("Locked. Wait...");
+return;
+}
+
+if(user.value===USER && pass.value===PASSWORD){
+
+show("Login Success ✔");
+
+setTimeout(()=>{
+window.location.href="index.html";
+},1000);
+
+}else{
+
+attempts++;
+show("Wrong Username or Password ❌");
+
+if(attempts>=3){
+lock();
+}
+}
+});
+</script>
+
+</body>
+</html>
