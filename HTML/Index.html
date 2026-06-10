@@ -3,21 +3,22 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../css/index.Css">
+<link rel="stylesheet" href="../css/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>UMUYOBORO TV | Inyigisho & Live Programs</title>
 
-  <!-- SEO -->
   <meta name="description" content="UMUYOBORO TV - Inyigisho, ubutumwa bwiza, live programs n'ibiganiro bitandukanye.">
-  <meta name="keywords" content="UMUYOBORO TV, Gospel, Rwanda, Inyigisho, Live TV">
-  <meta name="author" content="UMUYOBORO TV">
 
-  <!-- FONTS & ICONS -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+
 </head>
 
 <body>
@@ -48,71 +49,93 @@
     <a href="#videos">Videos</a>
     <a href="#live">Live</a>
     <a href="#contact">Contact</a>
+    <a href="pages/login.html">Login</a>
   </nav>
 
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ================= HOME ================= -->
+<section class="hero" id="home-section">
+
   <h2>Murakaza neza kuri UMUYOBORO TV</h2>
   <p>Inyigisho, ubutumwa bwiza na Live programs.</p>
+
   <a href="#videos" class="hero-btn">Reba Videos</a>
+
 </section>
 
-<!-- SLIDER -->
 <section class="slider">
   <img id="slider-image" src="File.png" alt="Slider Image">
 </section>
 
-<!-- VIDEOS -->
+<!-- ================= VIDEOS ================= -->
 <section id="videos">
-  <h2>Latest Videos</h2>
+
+  <h2>🎥 Videos</h2>
 
   <div class="content">
 
     <div class="video-card">
       <span class="live-badge">LIVE</span>
       <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
-      <p>Live Program</p>
+      <p>Live Program Replay</p>
     </div>
 
     <div class="video-card">
       <iframe src="https://www.youtube.com/embed/Tha95QEdV-M" allowfullscreen></iframe>
-      <p>Video 2</p>
+      <p>Teaching Video</p>
+    </div>
+
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+      <p>Gospel Message</p>
     </div>
 
   </div>
+
 </section>
 
-<!-- LIVE -->
+<!-- ================= LIVE ================= -->
 <section id="live">
+
   <h2>🔴 LIVE TV</h2>
 
   <div class="video-card">
     <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+    <p>Live Streaming Now</p>
   </div>
 
 </section>
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 <section id="contact">
-  <h2>Contact Us</h2>
 
-  <p><i class="fa-solid fa-envelope"></i> umuyoborotv@gmail.com</p>
-  <p><i class="fa-solid fa-phone"></i> +250 7XXXXXXXX</p>
-  <p><i class="fa-solid fa-location-dot"></i> Kigali - Rwanda</p>
+  <h2>📞 Contact Us</h2>
+
+  <div class="content">
+
+    <p><i class="fa-solid fa-envelope"></i> umuyoborotv@gmail.com</p>
+
+    <p><i class="fa-solid fa-phone"></i> +250 7XXXXXXXX</p>
+
+    <p><i class="fa-solid fa-location-dot"></i> Kigali - Rwanda</p>
+
+    <p><i class="fa-brands fa-youtube"></i> @irakizaconseiller</p>
+
+  </div>
+
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer>
 
   <h2>UMUYOBORO TV</h2>
   <p>Inyigisho • Gospel • Live</p>
 
   <div class="socials">
-    <a href="https://www.youtube.com/@irakizaconseiller" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-    <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://www.youtube.com/@irakizaconseiller"><i class="fa-brands fa-youtube"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook"></i></a>
   </div>
 
   <p>© <span id="year"></span> UMUYOBORO TV</p>
@@ -123,7 +146,6 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* MENU */
 function toggleMenu() {
   document.getElementById("menu").classList.toggle("show");
 }
@@ -131,30 +153,32 @@ function toggleMenu() {
 /* LOADER + SLIDER */
 window.addEventListener("load", () => {
 
-  document.getElementById("loader").style.display = "none";
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
 
   const images = ["File.png", "Img.jpg", "Img.png"];
   let i = 0;
   const slider = document.getElementById("slider-image");
 
-  if (!slider) return;
+  if (slider) {
+    setInterval(() => {
+      slider.style.opacity = 0;
 
-  setInterval(() => {
-    slider.style.opacity = 0;
+      setTimeout(() => {
+        i = (i + 1) % images.length;
+        slider.src = images[i];
+        slider.style.opacity = 1;
+      }, 300);
 
-    setTimeout(() => {
-      i = (i + 1) % images.length;
-      slider.src = images[i];
-      slider.style.opacity = 1;
-    }, 300);
-
-  }, 3000);
+    }, 3000);
+  }
 });
 
-/* CLOSE MENU OUTSIDE CLICK */
 document.addEventListener("click", (e) => {
   const menu = document.getElementById("menu");
   const icon = document.querySelector(".menu-icon");
+
+  if (!menu || !icon) return;
 
   if (!menu.contains(e.target) && !icon.contains(e.target)) {
     menu.classList.remove("show");
