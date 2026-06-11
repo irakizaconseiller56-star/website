@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="rw">
-
 <head>
   <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/index.css">
+
+ <!-- CSS -->
+  <link rel="stylesheet" href="../css/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>UMUYOBORO TV | Inyigisho & Live Programs</title>
+  <title>UMUYOBORO TV | Gospel & Live Programs</title>
 
-  <meta name="description" content="UMUYOBORO TV - Inyigisho, ubutumwa bwiza, live programs n'ibiganiro bitandukanye.">
+  <meta name="description" content="UMUYOBORO TV - Inyigisho, ubutumwa bwiza na Live programs.">
+  <meta name="keywords" content="Gospel Rwanda, Teaching, Live TV, UMUYOBORO TV">
+  <meta name="author" content="UMUYOBORO TV">
 
+ 
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <link rel="stylesheet" href="../index.css">
-
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
-
 </head>
 
 <body>
@@ -26,164 +27,127 @@
 <!-- LOADER -->
 <div id="loader">
   <div class="spinner"></div>
+  <p>Loading...</p>
 </div>
 
 <!-- HEADER -->
-<header class="header-container" id="home">
-
-  <div class="logo-box">
-    <img src="logo.png" class="logo" alt="UMUYOBORO TV Logo">
-
-    <div class="title-box">
-      <h1>UMUYOBORO TV</h1>
-      <p>Inyigisho • Gospel • Live</p>
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="UMUYOBORO TV Logo">
+    <div>
+      <h2>UMUYOBORO TV</h2>
+      <p>Gospel • Teaching • Live</p>
     </div>
   </div>
 
-  <div class="menu-icon" onclick="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-  </div>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
+    <i class="fa fa-bars"></i>
+  </button>
 
   <nav id="menu">
-    <a href="#home">Home</a>
+    <a href="#home" class="active">Home</a>
     <a href="#videos">Videos</a>
     <a href="#live">Live</a>
     <a href="#contact">Contact</a>
     <a href="pages/login.html">Login</a>
   </nav>
-
 </header>
 
-<!-- ================= HOME ================= -->
-<section class="hero" id="home-section">
-
-  <h2>Murakaza neza kuri UMUYOBORO TV</h2>
+<!-- HERO -->
+<section id="home" class="hero">
+  <h1>Murakaza neza kuri UMUYOBORO TV</h1>
   <p>Inyigisho, ubutumwa bwiza na Live programs.</p>
-
-  <a href="#videos" class="hero-btn">Reba Videos</a>
-
 </section>
 
+<!-- SLIDER -->
 <section class="slider">
-  <img id="slider-image" src="File.png" alt="Slider Image">
+  <img id="slider-image" src="File.png" alt="slider image">
 </section>
 
-<!-- ================= VIDEOS ================= -->
+<!-- LIVE STATUS -->
+<section class="live-status">
+  <p>🔴 Live Status: <span id="status">OFFLINE</span></p>
+</section>
+
+<!-- VIDEOS -->
 <section id="videos">
+  <h2>Videos</h2>
 
-  <h2>🎥 Videos</h2>
-
-  <div class="content">
-
-    <div class="video-card">
-      <span class="live-badge">LIVE</span>
-      <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
-      <p>Live Program Replay</p>
-    </div>
-
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/Tha95QEdV-M" allowfullscreen></iframe>
-      <p>Teaching Video</p>
-    </div>
-
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
-      <p>Gospel Message</p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ================= LIVE ================= -->
-<section id="live">
-
-  <h2>🔴 LIVE TV</h2>
-
-  <div class="video-card">
+  <div class="video-container">
     <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
-    <p>Live Streaming Now</p>
+    <iframe src="https://www.youtube.com/embed/Tha95QEdV-M" allowfullscreen></iframe>
   </div>
-
 </section>
 
-<!-- ================= CONTACT ================= -->
+<!-- LIVE -->
+<section id="live">
+  <h2>LIVE TV</h2>
+  <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
+  <h2>Contact Us</h2>
 
-  <h2>📞 Contact Us</h2>
+  <form onsubmit="sendMessage(event)">
+    <input id="name" type="text" placeholder="Amazina yawe" required>
+    <input id="email" type="email" placeholder="Email yawe" required>
+    <textarea id="message" placeholder="Ubutumwa bwawe" required></textarea>
+    <button type="submit">Ohereza</button>
+  </form>
 
-  <div class="content">
-
-    <p><i class="fa-solid fa-envelope"></i> umuyoborotv@gmail.com</p>
-
-    <p><i class="fa-solid fa-phone"></i> +250 7XXXXXXXX</p>
-
-    <p><i class="fa-solid fa-location-dot"></i> Kigali - Rwanda</p>
-
-    <p><i class="fa-brands fa-youtube"></i> @irakizaconseiller</p>
-
-  </div>
-
+  <p>📧 umuyoborotv@gmail.com</p>
+  <p>📞 +250 7XXXXXXXX</p>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/2507XXXXXXXX" target="_blank">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- BACK TO TOP -->
+<button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- FOOTER -->
 <footer>
-
-  <h2>UMUYOBORO TV</h2>
-  <p>Inyigisho • Gospel • Live</p>
-
-  <div class="socials">
-    <a href="https://www.youtube.com/@irakizaconseiller"><i class="fa-brands fa-youtube"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-  </div>
-
-  <p>© <span id="year"></span> UMUYOBORO TV</p>
-
+  <h3>UMUYOBORO TV</h3>
+  <p>© <span id="year"></span> All rights reserved</p>
 </footer>
 
 <!-- SCRIPT -->
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-function toggleMenu() {
+/* MENU */
+function toggleMenu(){
   document.getElementById("menu").classList.toggle("show");
 }
 
-/* LOADER + SLIDER */
-window.addEventListener("load", () => {
+/* LOADER */
+window.onload = () => {
+  document.getElementById("loader").style.display = "none";
+};
 
-  const loader = document.getElementById("loader");
-  if (loader) loader.style.display = "none";
+/* SLIDER */
+const images = ["File.png","Img.jpg","Img.png"];
+let i = 0;
 
-  const images = ["File.png", "Img.jpg", "Img.png"];
-  let i = 0;
-  const slider = document.getElementById("slider-image");
+setInterval(() => {
+  document.getElementById("slider-image").src = images[i];
+  i = (i + 1) % images.length;
+}, 3000);
 
-  if (slider) {
-    setInterval(() => {
-      slider.style.opacity = 0;
+/* CONTACT */
+function sendMessage(e){
+  e.preventDefault();
 
-      setTimeout(() => {
-        i = (i + 1) % images.length;
-        slider.src = images[i];
-        slider.style.opacity = 1;
-      }, 300);
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let message = document.getElementById("message").value;
 
-    }, 3000);
-  }
-});
-
-document.addEventListener("click", (e) => {
-  const menu = document.getElementById("menu");
-  const icon = document.querySelector(".menu-icon");
-
-  if (!menu || !icon) return;
-
-  if (!menu.contains(e.target) && !icon.contains(e.target)) {
-    menu.classList.remove("show");
-  }
-});
+  window.location.href =
+    `mailto:umuyoborotv@gmail.com?subject=${name}&body=${email}%0A%0A${message}`;
+}
 </script>
 
 </body>

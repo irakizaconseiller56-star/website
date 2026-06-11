@@ -1,89 +1,260 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+/* ================= RESET ================= */
+*,
+*::before,
+*::after{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html, body{
+  height:100%;
+}
 
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#000,#111);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at top, #111, #000);
+  color:#fff;
+  padding:15px;
+  overflow:hidden;
 }
 
+/* ================= BACKGROUND EFFECT ================= */
+body::before{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  background:gold;
+  filter:blur(160px);
+  opacity:0.08;
+  top:10%;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:0;
+}
+
+/* ================= LOGIN BOX ================= */
 .login-box{
-width:92%;
-max-width:420px;
-background:rgba(0,0,0,.9);
-padding:40px 30px;
-border-radius:18px;
-border:1px solid rgba(255,215,0,.2);
-color:#fff;
+  width:92%;
+  max-width:420px;
+  background:rgba(15,15,15,0.95);
+  padding:40px 30px;
+  border-radius:18px;
+  border:1px solid rgba(255,215,0,0.25);
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
+  animation:fadeIn 0.8s ease;
+  position:relative;
+  z-index:1;
+  transition:.3s;
 }
 
-h1{
-color:gold;
-text-align:center;
-margin-bottom:10px;
+.login-box:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 40px rgba(255,215,0,0.15);
 }
 
-p{
-text-align:center;
-color:#aaa;
-margin-bottom:20px;
+/* TITLE */
+.login-box h1{
+  text-align:center;
+  color:gold;
+  font-size:26px;
+  margin-bottom:5px;
+  letter-spacing:1px;
 }
 
+.login-box p{
+  text-align:center;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+/* ================= INPUT BOX ================= */
 .input-box{
-position:relative;
-margin-bottom:15px;
+  position:relative;
+  margin-bottom:15px;
 }
 
 .input-box input{
-width:100%;
-padding:14px 40px;
-border:none;
-outline:none;
-border-radius:10px;
-background:#111;
-color:#fff;
+  width:100%;
+  padding:14px 45px;
+  border:none;
+  outline:none;
+  border-radius:10px;
+  background:#111;
+  color:#fff;
+  border:1px solid transparent;
+  transition:.3s;
+  font-size:14px;
 }
 
-.input-box i:first-child{
-position:absolute;
-left:12px;
-top:50%;
-transform:translateY(-50%);
+.input-box input:focus{
+  border:1px solid gold;
+  box-shadow:0 0 12px rgba(255,215,0,0.25);
+  transform:scale(1.02);
 }
 
+/* ICONS */
+.input-box i.fa-user,
+.input-box i.fa-lock{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:gold;
+  font-size:14px;
+}
+
+/* EYE ICON */
 .eye{
-position:absolute;
-right:12px;
-top:50%;
-transform:translateY(-50%);
-cursor:pointer;
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  color:#aaa;
+  transition:.3s;
 }
 
+.eye:hover{
+  color:gold;
+}
+
+/* ================= OPTIONS ================= */
+.options{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  color:#aaa;
+  margin-bottom:15px;
+}
+
+.options label{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.options a{
+  color:gold;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.options a:hover{
+  text-decoration:underline;
+  color:#ffcc00;
+}
+
+/* ================= BUTTON ================= */
 button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-background:gold;
-font-weight:bold;
-cursor:pointer;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg, gold, #ffcc00);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+  font-size:15px;
+  position:relative;
+  overflow:hidden;
 }
 
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(255,215,0,0.3);
+}
+
+/* shine effect */
+button::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,0.25);
+  transform:skewX(-20deg);
+  transition:.5s;
+}
+
+button:hover::before{
+  left:120%;
+}
+
+button:active{
+  transform:scale(0.98);
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* ================= TOAST ================= */
 #toast{
-position:fixed;
-top:20px;
-right:20px;
-background:#111;
-color:#fff;
-padding:12px 15px;
-display:none;
-border-left:4px solid gold;
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#111;
+  color:#fff;
+  padding:12px 15px;
+  border-left:4px solid gold;
+  border-radius:6px;
+  font-size:13px;
+  z-index:9999;
+  opacity:0;
+  transform:translateX(20px);
+  transition:.3s;
 }
 
+#toast.show{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* ================= LOCK MESSAGE ================= */
 #lockMsg{
-color:red;
-text-align:center;
-margin-bottom:10px;
-font-size:13px;
+  text-align:center;
+  color:#ff4d4d;
+  font-size:12px;
+  margin-bottom:10px;
+  min-height:16px;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:500px){
+  .login-box{
+    padding:30px 20px;
+  }
+
+  .login-box h1{
+    font-size:22px;
+  }
+
+  .options{
+    flex-direction:column;
+    gap:8px;
+    align-items:flex-start;
+  }
 }

@@ -1,111 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="rw">
+
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="../css/login.css">
+  <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>UMUYOBORO TV | Secure Login</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+  <title>UMUYOBORO TV | Login</title>
+  
+  <!-- CSS LINK -->
+  <link rel="stylesheet" href="../css/login.css">
+ 
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<div id="toast"></div>
-
-<div class="login-box">
-
 <h1>UMUYOBORO TV</h1>
-<p>Secure Login Panel</p>
+<p>Secure Admin Login</p>
 
 <div id="lockMsg"></div>
 
 <form id="form">
 
-<div class="input-box">
-<i class="fa-solid fa-user"></i>
-<input id="username" type="text" placeholder="Username" required>
-</div>
+  <div>
+    <i class="fa-solid fa-user"></i>
+    <input id="username" type="text" placeholder="Username" required>
+  </div>
 
-<div class="input-box">
-<i class="fa-solid fa-lock"></i>
-<input id="password" type="password" placeholder="Password" required>
-<i class="fa-solid fa-eye eye" id="toggle"></i>
-</div>
+  <div>
+    <i class="fa-solid fa-lock"></i>
+    <input id="password" type="password" placeholder="Password" required>
+    <i class="fa-solid fa-eye" id="toggle"></i>
+  </div>
 
-<button type="submit">Login</button>
+  <div>
+    <label>
+      <input type="checkbox"> Remember me
+    </label>
+    <a href="#">Forgot password?</a>
+  </div>
+
+  <button type="submit" id="btn">Login</button>
 
 </form>
 
-</div>
+<div id="toast"></div>
 
 <script>
-const form=document.getElementById("form");
-const user=document.getElementById("username");
-const pass=document.getElementById("password");
-const toast=document.getElementById("toast");
-const toggle=document.getElementById("toggle");
-const lockMsg=document.getElementById("lockMsg");
+const form = document.getElementById("form");
+const user = document.getElementById("username");
+const pass = document.getElementById("password");
+const toggle = document.getElementById("toggle");
+const toast = document.getElementById("toast");
+const lockMsg = document.getElementById("lockMsg");
+const btn = document.getElementById("btn");
 
-const USER="admin";
-const PASSWORD="12345";
+const USER = "admin";
+const PASS = "12345";
 
-let attempts=0;
-let locked=false;
+let attempts = 0;
+let locked = false;
 
+/* TOAST */
 function show(msg){
-toast.textContent=msg;
-toast.style.display="block";
-setTimeout(()=>{
-toast.style.display="none";
-},2000);
+  toast.textContent = msg;
+  setTimeout(() => {
+    toast.textContent = "";
+  }, 2000);
 }
 
-toggle.onclick=()=>{
-pass.type=pass.type==="password"?"text":"password";
-toggle.classList.toggle("fa-eye-slash");
+/* PASSWORD SHOW/HIDE */
+toggle.onclick = () => {
+  pass.type = pass.type === "password" ? "text" : "password";
 };
 
+/* LOCK SYSTEM */
 function lock(){
-locked=true;
-lockMsg.textContent="Too many attempts. Try again in 10 seconds.";
+  locked = true;
+  btn.disabled = true;
+  lockMsg.textContent = "Too many attempts. Wait 10 seconds...";
 
-setTimeout(()=>{
-locked=false;
-attempts=0;
-lockMsg.textContent="";
-},10000);
+  setTimeout(() => {
+    locked = false;
+    attempts = 0;
+    btn.disabled = false;
+    lockMsg.textContent = "";
+  }, 10000);
 }
 
-form.addEventListener("submit",(e)=>{
-e.preventDefault();
+/* LOGIN */
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-if(locked){
-show("Locked. Wait...");
-return;
-}
+  if(locked){
+    show("Locked...");
+    return;
+  }
 
-if(user.value===USER && pass.value===PASSWORD){
+  btn.textContent = "Loading...";
 
-show("Login Success ✔");
+  setTimeout(() => {
 
-setTimeout(()=>{
-window.location.href="index.html";
-},1000);
+    if(user.value === USER && pass.value === PASS){
+      show("Login Successful ✔");
 
-}else{
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
 
-attempts++;
-show("Wrong Username or Password ❌");
+    } else {
+      attempts++;
+      show("Wrong username or password ❌");
 
-if(attempts>=3){
-lock();
-}
-}
+      if(attempts >= 3){
+        lock();
+      }
+    }
+
+    btn.textContent = "Login";
+
+  }, 700);
+
 });
 </script>
 
